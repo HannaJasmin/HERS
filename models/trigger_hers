@@ -1,0 +1,53 @@
+const { Model } = require("sequelize");
+
+module.exports = (sequelize, DataTypes) => {
+  class Trigger_hers extends Model {
+    toJSON() {
+      return { ...this.get() };
+    }
+  }
+
+  Trigger_hers.init(
+    {
+      id: { 
+        type: DataTypes.STRING,
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true
+      },
+      organization: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      location: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      additional_location_details: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+      department_or_room: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      emergency_code: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      additional_department_or_room_details: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
+      message: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
+    },
+    {
+      sequelize,
+      timestamps: true,
+      tableName: "Trigger_hers",
+    }
+  );
+  return Trigger_hers;
+};
