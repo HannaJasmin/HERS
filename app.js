@@ -7,7 +7,10 @@ const connectToPostgres = async () => await sequelize.authenticate();
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var hersRouter = require('./routes/hers');
-var triggerhersRouter=require('./routes/triggerhers')
+var triggerhersRouter=require('./routes/triggerhers');
+var organizationRouter=require('./routes/organizations');
+var locationsRouter=require('./routes/locations');
+var departmentorroomsRouter=require('./routes/departmentorrooms');
 var app = express();
 
 app.use(logger('dev'));
@@ -20,6 +23,9 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/hers', hersRouter)
 app.use('/triggerhers',triggerhersRouter);
+app.use('/organizations',organizationRouter);
+app.use('/locations',locationsRouter);
+app.use('/departmentorrooms',departmentorroomsRouter)
 
 
 app.use((req, res, next) => {

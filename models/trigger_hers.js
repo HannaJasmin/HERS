@@ -1,58 +1,53 @@
-const { type } = require("os");
 const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
-  class Hers extends Model {
+  class Trigger_hers extends Model {
     toJSON() {
       return { ...this.get() };
     }
   }
 
-  Hers.init(
+  Trigger_hers.init(
     {
       _id: { 
         type: DataTypes.STRING,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true
       },
-      code_name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
       organization: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      code_color: {
+      location: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      category: {
+      additional_location_details: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+      department_or_room: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      emergency_code: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      description: {
-        type: DataTypes.STRING,
+      additional_department_or_room_details: {
+        type: DataTypes.TEXT,
         allowNull: true,
       },
-      primary_responders: {
-        type: DataTypes.JSON,
+      message: {
+        type: DataTypes.TEXT,
         allowNull: true,
       },
-      secondary_responders: {
-        type: DataTypes.JSON,
-        allowNull: true,
-      },
-      tertory_responders: {
-        type: DataTypes.JSON,
-        allowNull: true,
-      }
     },
     {
       sequelize,
       timestamps: true,
-      tableName: "Hers",
+      tableName: "Trigger_hers",
     }
   );
-  return Hers;
+  return Trigger_hers;
 };

@@ -1,44 +1,32 @@
 const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
-  class Trigger_hers extends Model {
+  class Organizations extends Model {
     toJSON() {
       return { ...this.get() };
     }
   }
 
-  Trigger_hers.init(
+  Organizations.init(
     {
-      id: { 
+      _id: { 
         type: DataTypes.STRING,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true
       },
-      organization: {
+      organization_name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      location: {
+      organization_type: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      additional_location_details: {
-        type: DataTypes.TEXT,
+      status: {
+        type: DataTypes.ENUM('Active','Inactive'),
         allowNull: false,
       },
-      department_or_room: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
-      emergency_code: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      additional_department_or_room_details: {
-        type: DataTypes.TEXT,
-        allowNull: true,
-      },
-      message: {
+      description: {
         type: DataTypes.TEXT,
         allowNull: true,
       },
@@ -46,8 +34,11 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       timestamps: true,
-      tableName: "Trigger_hers",
+      tableName: "Organizations",
     }
   );
-  return Trigger_hers;
+  Organizations.associate = (models) => {
+    Organizations.hasMany(models.Locations, { foreignKey: 'organization_Id', onDelete: 'CASCADE' });
+        };
+  return Organizations;
 };

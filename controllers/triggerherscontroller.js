@@ -4,14 +4,7 @@ const { Trigger_hers } = require('../config/db');
 module.exports.AddTriggerHers = async (req, res, next) => {
   try {
     const {
-      organization,
-      location,
-      additional_location_details,
-      department_or_room,
-      emergency_code,
-      additional_department_or_room_details,
-      message
-    } = req.body;
+      organization,location,additional_location_details,department_or_room,emergency_code, additional_department_or_room_details,message} = req.body;
 
     if (!organization || !location || !additional_location_details || !emergency_code) {
       return res.status(400).json({ error: 'Required fields are missing.' });
